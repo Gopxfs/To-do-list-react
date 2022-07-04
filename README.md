@@ -1,5 +1,5 @@
 # To-do List
-> This website contains a to-do list where the user can add, edit and delete tasks. Every action is stored using local storage.
+> A website containing a to-do list where the user can add, edit and delete tasks. Every action is stored using local storage.
 
 ## Built With:
 - React
