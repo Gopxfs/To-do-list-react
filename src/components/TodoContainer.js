@@ -5,6 +5,13 @@ import InputTodo from './InputTodo';
 import TodosList from './TodoList';
 
 const TodoContainer = () => {
+  function getInitialTodos() {
+    // getting stored items
+    const temp = localStorage.getItem('todos');
+    const savedTodos = JSON.parse(temp);
+    return savedTodos || [];
+  }
+
   const [todos, setTodos] = useState(getInitialTodos());
 
   const handleChange = (id) => {
@@ -37,20 +44,14 @@ const TodoContainer = () => {
   const setUpdate = (updatedTitle, id) => {
     setTodos(
       todos.map((todo) => {
-        if (todo.id === id) {
-          todo.title = updatedTitle;
+        const newTodo = todo;
+        if (newTodo.id === id) {
+          newTodo.title = updatedTitle;
         }
-        return todo;
+        return newTodo;
       }),
     );
   };
-
-  function getInitialTodos() {
-    // getting stored items
-    const temp = localStorage.getItem('todos');
-    const savedTodos = JSON.parse(temp);
-    return savedTodos || [];
-  }
 
   useEffect(() => {
     // storing todos items

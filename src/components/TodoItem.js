@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { FaTrash } from 'react-icons/fa';
 import styles from './TodoItem.module.css';
 
@@ -22,7 +22,8 @@ const TodoItem = (props) => {
     textDecoration: 'line-through',
   };
 
-  const { completed, id, title } = props.todo;
+  const useProps = props;
+  const { completed, id, title } = useProps.todo;
 
   const viewMode = {};
   const editMode = {};
@@ -33,10 +34,6 @@ const TodoItem = (props) => {
     editMode.display = 'none';
   }
 
-  useEffect(() => () => {
-    console.log('Cleaning up...');
-  }, []);
-
   return (
     <li className={styles.item}>
       <div onDoubleClick={handleEditing} style={viewMode}>
@@ -44,9 +41,9 @@ const TodoItem = (props) => {
           type="checkbox"
           className={styles.checkbox}
           checked={completed}
-          onChange={() => props.handleChangeProps(id)}
+          onChange={() => useProps.handleChangeProps(id)}
         />
-        <button onClick={() => props.deleteTodoProps(id)}>
+        <button type="button" onClick={() => useProps.deleteTodoProps(id)}>
           <FaTrash style={{ color: 'orangered', fontSize: '16px' }} />
         </button>
         <span style={completed ? completedStyle : null}>{title}</span>
@@ -57,7 +54,7 @@ const TodoItem = (props) => {
         className={styles.textInput}
         value={title}
         onChange={(e) => {
-          props.setUpdate(e.target.value, id);
+          useProps.setUpdate(e.target.value, id);
         }}
         onKeyDown={handleUpdatedDone}
       />

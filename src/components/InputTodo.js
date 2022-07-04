@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FaPlus } from 'react-icons/fa';
+import PropTypes from 'prop-types';
 
 const InputTodo = (props) => {
   const [inputText, setInputText] = useState({
@@ -36,11 +37,19 @@ const InputTodo = (props) => {
         name="title"
         onChange={onChange}
       />
-      <button className="input-submit">
+      <button type="button" className="input-submit">
         <FaPlus style={{ color: 'darkcyan', fontSize: '20px', marginTop: '2px' }} />
       </button>
     </form>
   );
+};
+
+InputTodo.propTypes = {
+  addTodoProps: PropTypes.func,
+};
+
+InputTodo.defaultProps = {
+  addTodoProps: null,
 };
 
 export default InputTodo;
